@@ -4,6 +4,7 @@ from time import sleep
 
 from fighter import Fighter, Bullet
 from enemy import Enemy,Boss
+from item import HP_UP, POWER_UP, SCORE_UP, SUPER_POWER_UP
 
 
 
@@ -14,7 +15,7 @@ pad_width = 480  # 게임화면의 가로크기
 pad_height = 640  # 게임화면의 세로크기
 
 enemys  = []
-
+items = [] 
 
 
 # 적을 맞춘 개수 계싼
@@ -65,7 +66,7 @@ def drawObject(obj, x, y):
 
 # 게임 실행 메인 함수
 def runGame():
-    global gamepad, clock, fighter, enemys,bullet , boss,shot, explosion
+    global gamepad, clock, fighter, enemys,bullet , boss,shot, explosion, items
 
     # 전투기 무기에 적이 맞았을 경우 True로 설정되는 플래그
     #isShot = False
@@ -142,20 +143,26 @@ def runGame():
             for i, bxy in enumerate(bullet_xy):  # 총알요소에대해 반복함
                 bxy[1] -= 10  # 총알의 y좌표를 -10함 (위로 이동)
                 bullet_xy[i][1] = bxy[1]
-
+                chk = True
                 for enemy in enemys:
                     # 전투기 무기가 적을 격추했을 경우
                     if bxy[1] < enemy.y:
                         if bxy[0] > enemy.x - enemy.width and bxy[0] < enemy.x + enemy.width:
+                            print( bxy)
                             bullet_xy.remove(bxy)
                             enemy.isShot = True
                             shotcount += 1
                             drawObject(shot, enemy.x + 10, enemy.y)
+                            chk = False
+                            break
 
+                if( chk == False):
+                    break
                 if bxy[1] < boss.y:
                     if bxy[0] > boss.x - boss.width and bxy[0] < boss.x + boss.width:
                         boss.hp -= 1
                         bullet_xy.remove(bxy)
+                        break
                         drawObject(shot,boss.x + 10   , boss.y)
                         if( boss.hp == 0):
                             drawObject( explosion, boss.x + 10 ,boss.y)
@@ -168,6 +175,7 @@ def runGame():
                 if bxy[1] <= 0:  # 총알이 화면밖을 벗어나면
                     try:
                         bullet_xy.remove(bxy)  # 총알을 제거한다.
+                        break
                     except:
                         pass
 
@@ -205,8 +213,9 @@ def runGame():
 
 # 게임 초기화 함수
 def initGame():
-    global gamepad, clock, fighter, bullet, boss ,shot, explosion # 게임이 진행될 게임 화면, 게임의 초당 프레임(FPS), 비행기 변수 선언, 적 선언
-    global enemys
+    global gamepad, clock, fighter, bullet, boss ,shot, explosion
+    # 게임이 진행될 게임 화면, 게임의 초당 프레임(FPS), 비행기 변수 선언, 적 선언
+    global enemys, items
     pygame.init()
     gamepad = pygame.display.set_mode((pad_width, pad_height))  # 게임화면의 가로세로크기를 설정
     pygame.display.set_caption('Shooting Game')  # 게임화면의 제목 지정
@@ -214,6 +223,13 @@ def initGame():
     fighter = Fighter()
     for i in range(10):
         enemys.append(Enemy())
+
+    items.append( HP_UP())
+    items.append( POWER_UP())
+    items.append( SCORE_UP())
+    items.append( SUPER_POWER_UP())
+
+
 
     bullet = Bullet()
     boss = Boss()

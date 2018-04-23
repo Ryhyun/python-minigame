@@ -4,7 +4,7 @@ class Enemy:
     def __init__(self):
         self.hp = 1
         self.icon = pygame.image.load('image/enemy.png')
-        self.width = 28
+        self.width = 20
         self.height = 20
         self.isShot = False
         self.speed = 3
