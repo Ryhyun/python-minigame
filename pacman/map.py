@@ -29,10 +29,16 @@ def setupRoomOne(all_sprites_list):
     wall_list = pygame.sprite.RenderPlain()
 
     # This is a list of walls. Each is in the form [x, y, width, height]
-    walls = [[0, 0, 6, 600],
+    walls = [[0, 0, 6, 100],
+             [0,150,6 , 310],
+             [0,510,6,90],
              [0, 0, 600, 6],
              [0, 600, 606, 6],
-             [600, 0, 6, 606],
+
+             [600, 0, 6, 100],
+             [600,150, 6, 310],
+             [600,510, 6,96],
+
              [300, 0, 6, 66],
              [60, 60, 186, 6],
              [360, 60, 186, 6],

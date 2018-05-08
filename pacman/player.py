@@ -21,16 +21,14 @@ class Player(pygame.sprite.Sprite):
         self.prev_y = y
 
         # Clear the speed of the player
+    def changeIcon(self, filename):
+        self.image = pygame.image.load(filename).convert()
 
     def prevdirection(self):
         self.prev_x = self.change_x
         self.prev_y = self.change_y
 
         # Change the speed of the player
-
-    def changespeed(self, x, y):
-        self.change_x += x
-        self.change_y += y
 
     def changespeed(self, x, y):
         self.change_x += x
