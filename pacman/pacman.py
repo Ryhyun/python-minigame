@@ -202,29 +202,29 @@ def startGame():
             Pacman.rect.left = 15
             Pacman.rect.top = 110
 
-        returned = Pinky.changeRandom( False, p_turn, p_steps)
+        returned = Pinky.changeRandom( False, p_turn, p_steps,Pacman.rect.left, Pacman.rect.top)
         p_turn = returned[0]
         p_steps = returned[1]
-        Pinky.changeRandom( False, p_turn, p_steps)
+        #Pinky.changeRandom( False, p_turn, p_steps, Pacman.rect.left, Pacman.rect.top)
         Pinky.update(wall_list, False)
 
 
-        returned = Blinky.changeRandom( False, b_turn, b_steps)
+        returned = Blinky.changeRandom( False, b_turn, b_steps,Pacman.rect.left, Pacman.rect.top)
         b_turn = returned[0]
         b_steps = returned[1]
-        Blinky.changeRandom( False, b_turn, b_steps)
+        #Blinky.changeRandom( False, b_turn, b_steps,Pacman.rect.left, Pacman.rect.top)
         Blinky.update(wall_list, False)
 
-        returned = Inky.changeRandom( False, i_turn, i_steps)
+        returned = Inky.changeRandom( False, i_turn, i_steps,Pacman.rect.left, Pacman.rect.top)
         i_turn = returned[0]
         i_steps = returned[1]
-        Inky.changeRandom( False, i_turn, i_steps)
+        #Inky.changeRandom( False, i_turn, i_steps,Pacman.rect.left, Pacman.rect.top)
         Inky.update(wall_list, False)
 
-        returned = Clyde.changeRandom( "clyde", c_turn, c_steps)
+        returned = Clyde.changeRandom( "clyde", c_turn, c_steps,Pacman.rect.left, Pacman.rect.top)
         c_turn = returned[0]
         c_steps = returned[1]
-        Clyde.changeRandom( "clyde", c_turn, c_steps)
+        #Clyde.changeRandom( "clyde", c_turn, c_steps,Pacman.rect.left, Pacman.rect.top)
         Clyde.update(wall_list, False)
 
         # See if the Pacman block has collided with anything.
